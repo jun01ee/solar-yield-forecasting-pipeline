@@ -27,9 +27,9 @@ An end-to-end Machine Learning and Data Engineering pipeline designed to predict
 
 The pipeline is split into two primary components within Databricks:
 
-├── 1. Model Training Notebook (Regressor Chain + Sample Weights)
-├── 2. Production Inference Notebook (API Ingestion + Geometry Correction)
-└── Production Gold Layer Table (Delta Lake)
+* **1. Model Training Notebook:** Implements the `RegressorChain` model paired with our custom atmospheric interior sample weights.
+* **2. Production Inference Notebook:** Handles live 14-day Open-Meteo API ingestion, feature standardization, MLflow model serving, and the final `pvlib` geometry correction matrix.
+* **Production Gold Layer Table:** Saves the finalized continuous time series directly into a optimized Delta Lake table format.
 
 * **Bronze Layer:** Live 14-day hourly weather forecast ingestion via the Open-Meteo API.
 * **Silver Layer:** Automated feature engineering, scaling cloud fractions, and handling missing transmission packets safely via chronological forward/backward fills.
