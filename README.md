@@ -57,4 +57,4 @@ RUN_ID = "YOUR_MLFLOW_RUN_ID"
 The production notebook is scheduled via Databricks Workflows to execute daily at 05:00 AM AWST, refreshing the 14-day operational outlook before local sunrise.
 
 ## 📊 Sample Visualizations
-(Placeholder: Insert your exported 14-Day GTI Power Yield Time Series Profile chart here to showcase your smooth diurnal waves, clear-sky direct components, and diffuse scattering profiles for your presentation).
+![Latest Forecast](7_Day_GTI_Power_Yield_Profile.png)
