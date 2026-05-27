@@ -32,7 +32,7 @@ jobs:
         databricks workspace export \
           "${{ vars.DATABRICKS_DIR }}/solar-yield-forecasting-pipeline/7_Day_GTI_Power_Yield_Profile.png" \
           ./7_Day_GTI_Power_Yield_Profile.png \
-          --file --overwrite
+          --object-type FILE \ --overwrite
 
     - name: Commit and Push Figure
       run: |
