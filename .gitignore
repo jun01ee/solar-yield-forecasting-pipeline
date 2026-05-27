@@ -11,3 +11,4 @@ mlruns/
 artifacts/
 *.egg-info/
 .DS_Store
+docs/CV_PROJECT_BRIEF.md
