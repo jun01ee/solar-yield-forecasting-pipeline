@@ -30,9 +30,9 @@ jobs:
       run: |
         # Use the GitHub variable to reconstruct the full path dynamically
         databricks workspace export \
-          "${{ vars.DATABRICKS_DIR }}/solar-yield-forecasting-pipeline/7_Day_GTI_Power_Yield_Profile.png" \
+          "/Users/${{ vars.GMAIL_HANDLE }}@gmail.com/solar-yield-forecasting-pipeline/7_Day_GTI_Power_Yield_Profile.png" \
           ./7_Day_GTI_Power_Yield_Profile.png \
-          --object-type FILE \ --overwrite
+          --file \ --overwrite
 
     - name: Commit and Push Figure
       run: |
