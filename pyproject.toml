@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "solar-yield-forecasting-pipeline"
+version = "0.1.0"
+description = "Databricks MLOps pipeline for solar yield forecasting with pvlib and MLflow."
+requires-python = ">=3.9"
+dependencies = [
+    "openmeteo-requests",
+    "pvlib",
+    "pandas",
+    "numpy",
+    "pyarrow",
+    "xgboost",
+    "scikit-learn",
+    "mlflow",
+    "matplotlib",
+    "seaborn",
+    "requests",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

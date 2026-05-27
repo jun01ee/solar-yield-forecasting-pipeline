@@ -1,0 +1,11 @@
+openmeteo-requests
+pvlib
+pandas
+numpy
+pyarrow
+xgboost
+scikit-learn
+mlflow
+matplotlib
+seaborn
+requests
