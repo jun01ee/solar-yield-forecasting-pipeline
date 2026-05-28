@@ -39,7 +39,6 @@ Gold: hourly 7-day solar attenuation and GTI forecast
 ├── SolarEnergy_daily_inference.ipynb   # Databricks scheduled daily inference notebook
 ├── src/solar_yield/                    # Reusable feature, quality, config, and physics utilities
 ├── tests/                              # Unit tests for reusable pipeline logic
-├── docs/CV_PROJECT_BRIEF.md            # Interview/CV summary
 ├── docs/MODEL_CARD.md                  # Model intent, inputs, guardrails, and limitations
 ├── requirements.txt                    # Runtime dependencies
 ├── requirements-dev.txt                # Test/lint dependencies
@@ -105,6 +104,3 @@ pytest
 - Do not hard-code personal access tokens, clone URLs with embedded credentials, or private run IDs.
 - The daily inference notebook uses `dbutils.secrets.get(scope="github", key="GITHUB_TOKEN")` and the GitHub Contents API to publish `7_Day_GTI_Power_Yield_Profile.png` to the `forecast-artifacts` branch.
 
-## Suggested CV Bullet
-
-Developed a Databricks-based solar yield forecasting pipeline using Open-Meteo, pvlib, XGBoost, and MLflow; engineered weather-to-irradiance features, registered a chained multi-output model, and scheduled daily inference to produce 7-day plane-of-array GTI forecasts for operational monitoring.

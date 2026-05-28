@@ -15,3 +15,5 @@ Built an end-to-end Databricks Free Edition pipeline that forecasts solar irradi
 ## Suggested CV Bullet
 
 Developed a Databricks-based solar yield forecasting pipeline using Open-Meteo, pvlib, XGBoost, and MLflow; engineered weather-to-irradiance features, registered a chained multi-output model, and scheduled daily inference to produce 7-day plane-of-array GTI forecasts for operational monitoring.
+
+Extended the pipeline from static tabular regression to time-aware irradiance forecasting by adding lagged atmospheric features, rolling cloud dynamics, chronological backtesting, and model comparison against persistence and clear-sky baselines.
