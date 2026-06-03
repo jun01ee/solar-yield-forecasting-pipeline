@@ -4,7 +4,13 @@ End-to-end Databricks Free Edition project for forecasting solar irradiance atte
 
 The project combines live weather ingestion, physics-based solar geometry, multi-output machine learning, MLflow model tracking, and a scheduled daily inference workflow.
 
-![Latest Forecast](https://raw.githubusercontent.com/jun01ee/solar-yield-forecasting-pipeline/forecast-artifacts/7_Day_GTI_Power_Yield_Profile.png)
+Latest attenuation forecast:
+
+![Latest Solar Attenuation Forecast](https://raw.githubusercontent.com/jun01ee/solar-yield-forecasting-pipeline/forecast-artifacts/7_Day_Attenuation_Forecast_Profile.png)
+
+Latest plane-of-array GTI forecast:
+
+![Latest GTI Forecast](https://raw.githubusercontent.com/jun01ee/solar-yield-forecasting-pipeline/forecast-artifacts/7_Day_GTI_Power_Yield_Profile.png)
 
 ## Why This Project Matters
 
@@ -42,7 +48,7 @@ Gold: hourly 7-day solar attenuation and GTI forecast
 ├── docs/MODEL_CARD.md                  # Model intent, inputs, guardrails, and limitations
 ├── requirements.txt                    # Runtime dependencies
 ├── requirements-dev.txt                # Test/lint dependencies
-└── 7_Day_GTI_Power_Yield_Profile.png   # Example forecast artifact
+└── 7_Day_GTI_Power_Yield_Profile.png   # Example GTI forecast artifact
 ```
 
 ## MLOps Features
@@ -102,5 +108,4 @@ pytest
 
 - Keep GitHub tokens and Databricks secrets in Databricks Secret Scopes or environment variables.
 - Do not hard-code personal access tokens, clone URLs with embedded credentials, or private run IDs.
-- The daily inference notebook uses `dbutils.secrets.get(scope="github", key="GITHUB_TOKEN")` and the GitHub Contents API to publish `7_Day_GTI_Power_Yield_Profile.png` to the `forecast-artifacts` branch.
-
+- The daily inference notebook uses `dbutils.secrets.get(scope="github", key="GITHUB_TOKEN")` and a GitHub token-backed git push to publish refreshed forecast images to the `forecast-artifacts` branch.
