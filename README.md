@@ -25,10 +25,10 @@ Open-Meteo API
 Bronze: hourly weather forecast and historical weather observations
     |
     v
-Silver: normalized cloud, humidity, sunshine, pressure, and clear-sky features
+Silver: normalized weather, cyclic time, lag, rolling, and clear-sky features
     |
     v
-MLflow model: weighted chained XGBoost multi-output regressor
+MLflow model: time-aware weighted chained XGBoost multi-output regressor
     |
     v
 Physics layer: pvlib clear-sky and plane-of-array GTI projection
@@ -62,25 +62,46 @@ Gold: hourly 7-day solar attenuation and GTI forecast
 
 ## Model Approach
 
-The training notebook builds a two-target model for:
+The training notebook builds a two-target attenuation model for:
 
 - `direct_clear_sky_factor`
 - `diffuse_clear_sky_factor`
 
-The final approach uses:
+The current production candidate is a time-aware tabular model. It keeps Open-Meteo weather as the exogenous forecast source, then predicts how much clear-sky direct and diffuse irradiance should remain after atmospheric attenuation.
+
+The final model uses:
 
 - `XGBRegressor` as the base estimator.
 - `RegressorChain` to let the diffuse prediction depend on the direct prediction.
+- Weather inputs including cloud tiers, water vapour, sunshine fraction, temperature, humidity, and pressure.
+- Cyclic time features plus lagged, rolling, and delta weather features.
 - Interior sample weighting to prioritize dynamic daylight observations over stable physical boundaries.
+- Chronological validation instead of random train/test splitting.
 - Post-processing constraints to keep predictions inside physically meaningful `[0, 1]` bounds.
+
+Model features are kept UTC-consistent between training and inference so the trained time features match the scheduled forecast path. Forecast figures convert timestamps to Perth local time for display only.
+
+The latest benchmark compares:
+
+- a 24-hour persistence baseline
+- the previous static weighted chained XGBoost model
+- the time-aware weighted chained XGBoost model
+
+On the 2024 validation split, the time-aware model had the lowest combined direct/diffuse RMSE and was selected for inference.
 
 ## Databricks Usage
 
 1. Import the notebooks into Databricks Free Edition.
 2. Install dependencies from `requirements.txt` or run the `%pip install ...` cell in each notebook.
 3. Run `SolarEnergy_Pipeline.ipynb` to ingest historical data, engineer features, train the model, and log it to MLflow.
-4. Set the `model_run_id` Databricks widget to the chosen MLflow run ID from training.
+4. Copy the exact `model_uri` printed by the training notebook.
 5. Schedule `SolarEnergy_daily_inference.ipynb` as a Databricks Workflow to refresh the 7-day forecast.
+
+For scheduled inference, set the Databricks job parameter:
+
+```text
+model_uri=<the exact MLflow model URI printed by training>
+```
 
 Recommended production parameters:
 
