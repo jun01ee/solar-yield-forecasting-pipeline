@@ -6,11 +6,11 @@ The project combines live weather ingestion, physics-based solar geometry, multi
 
 Latest attenuation forecast:
 
-![Latest Solar Attenuation Forecast](https://raw.githubusercontent.com/jun01ee/solar-yield-forecasting-pipeline/forecast-artifacts/7_Day_Attenuation_Forecast_Profile.png)
+![Latest Solar Attenuation Forecast](7_Day_Attenuation_Forecast_Profile.png)
 
 Latest plane-of-array GTI forecast:
 
-![Latest GTI Forecast](https://raw.githubusercontent.com/jun01ee/solar-yield-forecasting-pipeline/forecast-artifacts/7_Day_GTI_Power_Yield_Profile.png)
+![Latest GTI Forecast](7_Day_GTI_Power_Yield_Profile.png)
 
 ## Why This Project Matters
 
@@ -108,4 +108,4 @@ pytest
 
 - Keep GitHub tokens and Databricks secrets in Databricks Secret Scopes or environment variables.
 - Do not hard-code personal access tokens, clone URLs with embedded credentials, or private run IDs.
-- The daily inference notebook uses `dbutils.secrets.get(scope="github", key="GITHUB_TOKEN")` and a GitHub token-backed git push to publish refreshed forecast images to the `forecast-artifacts` branch.
+- The daily inference notebook uses `dbutils.secrets.get(scope="github", key="GITHUB_TOKEN")` and a GitHub token-backed git push to publish refreshed forecast images to the `main` branch.
